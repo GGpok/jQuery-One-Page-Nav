@@ -42,6 +42,7 @@
 			filter: '',
 			scrollSpeed: 750,
 			scrollThreshold: 0.5,
+			offsetFixer: 0,
 			begin: false,
 			end: false,
 			scrollChange: false
@@ -119,7 +120,7 @@
 				$target = $('#' + linkHref);
 
 				if($target.length) {
-					topPos = $target.offset().top;
+					topPos = $target.offset().top + self.config.offsetFixer;
 					self.sections[linkHref] = Math.round(topPos);
 				}
 			});
@@ -199,7 +200,7 @@
 		},
 
 		scrollTo: function(target, callback) {
-			var offset = $(target).offset().top;
+			var offset = $(target).offset().top + this.config.offsetFixer;
 
 			$('html, body').animate({
 				scrollTop: offset
